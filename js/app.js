@@ -13,11 +13,13 @@ const loadWeather = async (city) => {
 }
 
 const displayWeather = (data) => {
-    temparatur = parseInt(data.main.temp - 273.15);
+    if (data.cod == 200) {
+        temparatur = parseInt(data.main.temp - 273.15);
     const displayContainer = document.getElementById('display');
+    displayContainer.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
-    <div class="card mb-3 mx-auto" style="width: 20rem;">
+    <div class="card mb-3 mx-auto bg-info bg-opacity-50" style="width: 20rem;">
         <img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" class="card-img-top rounded mx-auto" style="height: 10rem; width: 10rem;" alt="...">
         <div class="card-body">
             <h5 class="card-title text-center">${data.name}</h5>
@@ -27,4 +29,9 @@ const displayWeather = (data) => {
     </div>
     `;
     displayContainer.appendChild(div);
+    alert('City Added Succefully');
+    } else {
+        alert('Please Enter Valid City');
+    }
+    
 }
